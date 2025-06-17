@@ -81,8 +81,8 @@ const Settings = ({ isOpen, onClose }) => {
                     <img
                       src={logo}
                       alt="hn-cafe logo"
-                      width={118}
-                      height={82}
+                      width={189}
+                      height={72}
                     />
                   </div>
                 </div>
