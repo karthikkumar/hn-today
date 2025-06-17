@@ -131,16 +131,7 @@ const Settings = ({ isOpen, onClose }) => {
                 }}
               >
                 <p css={{ paddingBottom: "0.5rem" }}>
-                  Why HackerNews.Cafe? because, Y Combinator's Hacker News
-                  portal doesn't have an option to read only the top news (by
-                  score, not by rank) for a given date. HN Cafe is just an
-                  aggregator, source of the feed is from the official Hacker
-                  News API.
-                </p>
-                <p>
-                  HN Cafe is for those who want to spend a good and finite
-                  amount of time (like coffee time) to catch up with Hacker
-                  News.
+                  Why hackernews.today exists? because, Y Combinator's Hacker News portal doesn't have an option to read news in a chronological order. Which makes me procrastinate when I really want to catch the latest news, so I created one for myself and others.
                 </p>
               </div>
               <div
