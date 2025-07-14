@@ -24,7 +24,7 @@ const Loading = ({ style }) => {
           margin: "0.6rem",
         }}
       ></span>
-      <p css={{ flexShrink: 0 }}>{`Brewing . . .`}</p>
+      <p css={{ flexShrink: 0 }}>{`Loading . . .`}</p>
     </div>
   );
 };

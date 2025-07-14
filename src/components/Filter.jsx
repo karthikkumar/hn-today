@@ -30,7 +30,7 @@ const Option = ({ checked, valueLabel }) => (
           },
         }}
       >
-        HOT
+        TOP
       </span>
     )}
     {valueLabel}
