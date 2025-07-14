@@ -131,7 +131,7 @@ const Settings = ({ isOpen, onClose }) => {
                 }}
               >
                 <p css={{ paddingBottom: "0.5rem" }}>
-                  {`Hey, wondered why hackernews.today exists? Well, it\’s because Y Combinator\’s Hacker News portal doesn\’t have an option to read stories in chronological order. This made me procrastinate when I really wanted to stay updated on the latest news. So, I decided to create one for myself and others.`}
+                  {`Hey, wondered why hackernews.today exists? Well, it’s because Y Combinator’s Hacker News portal doesn’t have an option to read stories in chronological order. This made me procrastinate when I really wanted to stay updated on the latest news. So, I decided to create one for myself and others.`}
                 </p>
               </div>
               <div
