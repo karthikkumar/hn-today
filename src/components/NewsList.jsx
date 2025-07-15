@@ -63,32 +63,42 @@ function NewsList() {
     count: storiesByDates.length,
     getScrollElement: () => parentRef.current,
     estimateSize: (index) => {
-      if (storiesByDates.length) {
-        let total = 150; // padding and date row
-        const minItemHeight = 37; // other elements
+      if (storiesByDates.length && storiesByDates[index]) {
         const items = storiesByDates[index];
-        items.stories.slice(0, top).forEach(({ title }) => {
-          // finding number of lines by title's length is rough
-          // accurate size is not required here
-          let charLen = title.length;
-          if (width <= 500) {
-            charLen = 25;
-          } else if (width <= 900) {
-            charLen = 50;
-          }
-          const titleLines = Math.round(title.length / charLen);
-          const titleHeight = titleLines * 22;
-          const itemHeight = titleHeight + minItemHeight;
-          total += itemHeight;
-        });
-        return total;
+        
+        // Base height for DateHeader component (padding + actual header)
+        const dateHeaderHeight = 50; // Increased from rough estimate
+        
+        // Base height for section padding
+        const sectionPadding = 50; // paddingBottom from the virtualRow div
+        
+        // Calculate dynamic height based on number of items to show
+        const itemsToShow = Math.min(items.stories.length, top);
+        
+        // More accurate estimation per NewsItem
+        const baseItemHeight = 42; // Base height for rank, padding, metadata
+        const estimatedItemHeight = itemsToShow * baseItemHeight;
+        
+        // Add extra height for title text based on responsive breakpoints
+        let titleEstimatePerItem = 25; // Conservative estimate for title height
+        if (width <= 500) {
+          titleEstimatePerItem = 45; // More lines on mobile
+        }
+        
+        const totalTitleHeight = itemsToShow * titleEstimatePerItem;
+        
+        return dateHeaderHeight + estimatedItemHeight + totalTitleHeight + sectionPadding;
       }
+      
+      // Fallback for empty or invalid data
+      return 200;
     },
   });
 
   useEffect(() => {
+    // Re-measure when width, top filter, or refreshKey changes
     rowVirtualizer.measure();
-  }, [width, rowVirtualizer]);
+  }, [width, top, refreshKey, rowVirtualizer]);
 
   const [lastItem] = [...rowVirtualizer.getVirtualItems()].reverse();
 
@@ -157,9 +167,13 @@ function NewsList() {
         {!storiesByDates.length && isError && <Error />}
         {stickyHeader && <StickyHeader title={stickyHeader} />}
         {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-          const { date, stories } = storiesByDates.length
+          const { date, stories = [] } = storiesByDates.length
             ? storiesByDates[virtualRow.index]
             : {};
+          
+          // Ensure we don't render more items than available
+          const itemsToRender = stories.slice(0, top);
+          
           return (
             <div
               key={virtualRow.index}
@@ -175,7 +189,7 @@ function NewsList() {
               }}
             >
               <DateHeader date={date} ref={setRef(virtualRow.index)} />
-              {stories.slice(0, top).map((story, index) => (
+              {itemsToRender.map((story, index) => (
                 <NewsItem
                   rank={index + 1}
                   {...story}
