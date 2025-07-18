@@ -169,7 +169,7 @@ function NewsList() {
                 top: 0,
                 left: 0,
                 width: "100%",
-                height: "max-contents",
+                height: "max-content",
                 transform: `translateY(${virtualRow.start}px)`,
                 paddingBottom: "50px",
               }}

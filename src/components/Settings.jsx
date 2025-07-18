@@ -207,7 +207,7 @@ const Settings = ({ isOpen, onClose }) => {
                   fontSize: "1rem",
                   display: "grid",
                   gridTemplateColumns: "1fr 3fr",
-                  gridTemplateRowss: "1fr",
+                  gridTemplateRows: "1fr",
                   gap: "1rem",
 
                   "@media (max-width: 900px)": {
